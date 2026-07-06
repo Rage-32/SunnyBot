@@ -5,13 +5,18 @@ A Discord bot for the **Top.gg Summer Bot Jam 2026** - built with C#, DSharpPlus
 ## Features
 
 - **Summer Bucket List** - Add, view (paginated), complete, remove, and track stats on your personal summer bucket list items
-- **Weather** - Current weather conditions via OpenWeatherMap (temperature, humidity, wind speed, description)
+  - `/bucket_add` - Add an item to your summer bucket list
+  - `/bucket_list` - View all items in your summer bucket list
+  - `/bucket_done` - Mark a bucket list item as completed
+  - `/bucket_remove` - Remove an item from your bucket list
+  - `/bucket_stats` - View your bucket list completion stats
 - **Photo Contest** - Submit, browse, and rank summer photos
   - `/photo_submit` - Upload a `.png`/`.jpeg`/`.jpg` with an optional description
   - `/photo_list` - Paginated gallery of all submissions with vote counts and jump links
   - `/photo_leaderboard` - Top 10 ranked by net upvotes
   - `/photo_remove` - (Manage Guild) Delete a specific submission
   - `/photo_reset` - (Manage Guild) Wipe all submissions and votes
+- **Weather** - Current weather conditions via OpenWeatherMap (temperature, humidity, wind speed, description)
 
 ## Setup
 1. **Restore packages**

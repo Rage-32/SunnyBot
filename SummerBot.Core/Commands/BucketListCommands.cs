@@ -1,4 +1,5 @@
-﻿using DSharpPlus.Commands;
+﻿using System.ComponentModel;
+using DSharpPlus.Commands;
 using DSharpPlus.Entities;
 using Microsoft.EntityFrameworkCore;
 using SummerBot.Database.Data;
@@ -9,7 +10,8 @@ namespace SummerBot.Commands;
 public class BucketListCommands(SummerBotDbContext db)
 {
     [Command("bucket_add")]
-    public async Task AddCommand(CommandContext ctx, string item)
+    [Description("Add an item to your summer bucket list.")]
+    public async Task AddCommand(CommandContext ctx, [Description("The item to add.")] string item)
     {
         var entry = new BucketListItem
         {
@@ -32,6 +34,7 @@ public class BucketListCommands(SummerBotDbContext db)
     }
     
     [Command("bucket_list")]
+    [Description("View all items in your summer bucket list.")]
     public async Task ViewCommand(CommandContext ctx)
     {
         var items = await db.BucketListItems
@@ -65,7 +68,8 @@ public class BucketListCommands(SummerBotDbContext db)
     }
 
     [Command("bucket_done")]
-    public async Task DoneCommand(CommandContext ctx, int id)
+    [Description("Mark a bucket list item as completed.")]
+    public async Task DoneCommand(CommandContext ctx, [Description("The ID of the item to mark complete.")] int id)
     {
         var item = await db.BucketListItems.FindAsync(id);
         if (item is null || item.UserId != ctx.User.Id)
@@ -90,7 +94,8 @@ public class BucketListCommands(SummerBotDbContext db)
     }
 
     [Command("bucket_remove")]
-    public async Task RemoveCommand(CommandContext ctx, int id)
+    [Description("Remove an item from your bucket list.")]
+    public async Task RemoveCommand(CommandContext ctx, [Description("The ID of the item to remove.")] int id)
     {
         var item = await db.BucketListItems.FindAsync(id);
         if (item is null || item.UserId != ctx.User.Id)
@@ -114,6 +119,7 @@ public class BucketListCommands(SummerBotDbContext db)
     }
 
     [Command("bucket_stats")]
+    [Description("View your bucket list completion stats.")]
     public async Task StatsCommand(CommandContext ctx)
     {
         var total = await db.BucketListItems.CountAsync(x => x.UserId == ctx.User.Id);
