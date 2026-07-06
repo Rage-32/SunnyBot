@@ -18,6 +18,24 @@ public class GeneralCommands(WeatherService weather)
         await ctx.RespondAsync(embed);
     }
 
+    [Command("Help")]
+    [Description("View a list of all commands.")]
+    public async Task HelpCommand(CommandContext ctx)
+    {
+        await ctx.DeferResponseAsync();
+        
+        var commands = await ctx.Client.GetGlobalApplicationCommandsAsync();
+
+        var embed = new DiscordEmbedBuilder()
+            .WithTitle("SummerBot Commands Help")
+            .WithColor(new DiscordColor(0x5865F2))
+            .WithDescription($"A list of all **{commands.Count}** commands.");
+
+        embed.AddField("Commands", $"{string.Join(", ", commands.Select(r => r.Mention))}");
+
+        await ctx.RespondAsync(embed);
+    }
+
     [Command("weather")]
     [Description("View the weather in a location.")]
     public async Task WeatherCommand(CommandContext ctx, [Description("The location to view the weather in.")] string location)
