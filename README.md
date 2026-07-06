@@ -19,3 +19,4 @@ Powered by [stellarbot.dev](https://stellarbot.dev/)
   - `/photo_reset` - (Manage Guild) Wipe all submissions and votes
 - **Weather** (/weather) - Current weather conditions via OpenWeatherMap (temperature, humidity, wind speed, description)
 - **Random Summer Fact** (/summer_fact) - Get a random summer-themed fact
+- **Help** (/help) - Help command to view all available commands within the bot
