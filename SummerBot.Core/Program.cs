@@ -11,6 +11,7 @@ using SummerBot;
 using SummerBot.Commands;
 using SummerBot.Database.Data;
 using Microsoft.EntityFrameworkCore;
+using SummerBot.Events;
 using SummerBot.Events.PhotoContest;
 using SummerBot.Services;
 
@@ -36,6 +37,9 @@ var host = Host.CreateDefaultBuilder(args)
 
         services.ConfigureEventHandlers(b =>
         {
+            b.AddEventHandlers<GuildDownloadCompletedEvent>(ServiceLifetime.Singleton);
+            
+            // photo contest event handlers
             b.AddEventHandlers<PhotoVoteHandler>(ServiceLifetime.Singleton);
             b.AddEventHandlers<PhotoDeleteHandler>(ServiceLifetime.Singleton);
         });
