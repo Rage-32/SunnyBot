@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SummerBot.Database.Data;
 
@@ -10,9 +11,11 @@ using SummerBot.Database.Data;
 namespace SummerBot.Database.Migrations
 {
     [DbContext(typeof(SummerBotDbContext))]
-    partial class SummerBotDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260706211528_PhotoContestMessageLinkColumn")]
+    partial class PhotoContestMessageLinkColumn
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "10.0.9");
@@ -57,15 +60,9 @@ namespace SummerBot.Database.Migrations
                     b.Property<int>("Downvotes")
                         .HasColumnType("INTEGER");
 
-                    b.Property<ulong>("GuildId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("ImageUrl")
                         .IsRequired()
                         .HasColumnType("TEXT");
-
-                    b.Property<ulong>("MessageId")
-                        .HasColumnType("INTEGER");
 
                     b.Property<string>("MessageLink")
                         .HasColumnType("TEXT");
@@ -82,32 +79,6 @@ namespace SummerBot.Database.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("PhotoSubmissions");
-                });
-
-            modelBuilder.Entity("SummerBot.Database.Entities.PhotoVote", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<ulong>("GuildId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<bool>("IsUpVote")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("PhotoSubmissionId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<ulong>("UserId")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PhotoSubmissionId", "UserId")
-                        .IsUnique();
-
-                    b.ToTable("PhotoVotes");
                 });
 #pragma warning restore 612, 618
         }

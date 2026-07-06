@@ -1,6 +1,9 @@
 ﻿using DSharpPlus;
 using DSharpPlus.Commands;
 using DSharpPlus.Extensions;
+using DSharpPlus.Interactivity;
+using DSharpPlus.Interactivity.Enums;
+using DSharpPlus.Interactivity.Extensions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -8,6 +11,7 @@ using SummerBot;
 using SummerBot.Commands;
 using SummerBot.Database.Data;
 using Microsoft.EntityFrameworkCore;
+using SummerBot.Events.PhotoContest;
 using SummerBot.Services;
 
 var host = Host.CreateDefaultBuilder(args)
@@ -22,6 +26,18 @@ var host = Host.CreateDefaultBuilder(args)
         services.AddCommandsExtension((_, commands) =>
         {
             commands.AddCommands(typeof(GeneralCommands).Assembly);
+        });
+
+        services.AddInteractivityExtension(new InteractivityConfiguration
+        {
+            PollBehaviour = PollBehaviour.KeepEmojis,
+            Timeout = TimeSpan.FromSeconds(300)
+        });
+
+        services.ConfigureEventHandlers(b =>
+        {
+            b.AddEventHandlers<PhotoVoteHandler>(ServiceLifetime.Singleton);
+            b.AddEventHandlers<PhotoDeleteHandler>(ServiceLifetime.Singleton);
         });
 
         services.AddHostedService<DiscordBotService>();

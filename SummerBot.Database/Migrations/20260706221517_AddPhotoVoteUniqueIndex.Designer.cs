@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SummerBot.Database.Data;
 
@@ -10,9 +11,11 @@ using SummerBot.Database.Data;
 namespace SummerBot.Database.Migrations
 {
     [DbContext(typeof(SummerBotDbContext))]
-    partial class SummerBotDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260706221517_AddPhotoVoteUniqueIndex")]
+    partial class AddPhotoVoteUniqueIndex
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "10.0.9");
@@ -64,9 +67,6 @@ namespace SummerBot.Database.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<ulong>("MessageId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("MessageLink")
                         .HasColumnType("TEXT");
 
@@ -88,9 +88,6 @@ namespace SummerBot.Database.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<ulong>("GuildId")
                         .HasColumnType("INTEGER");
 
                     b.Property<bool>("IsUpVote")

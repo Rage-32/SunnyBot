@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SummerBot.Database.Data;
 
@@ -10,9 +11,11 @@ using SummerBot.Database.Data;
 namespace SummerBot.Database.Migrations
 {
     [DbContext(typeof(SummerBotDbContext))]
-    partial class SummerBotDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260706223023_AddPhotoVoteGuildIdColumn")]
+    partial class AddPhotoVoteGuildIdColumn
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "10.0.9");
@@ -63,9 +66,6 @@ namespace SummerBot.Database.Migrations
                     b.Property<string>("ImageUrl")
                         .IsRequired()
                         .HasColumnType("TEXT");
-
-                    b.Property<ulong>("MessageId")
-                        .HasColumnType("INTEGER");
 
                     b.Property<string>("MessageLink")
                         .HasColumnType("TEXT");
