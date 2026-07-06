@@ -8,6 +8,7 @@ using SummerBot;
 using SummerBot.Commands;
 using SummerBot.Database.Data;
 using Microsoft.EntityFrameworkCore;
+using SummerBot.Services;
 
 var host = Host.CreateDefaultBuilder(args)
     .ConfigureAppConfiguration(config =>
@@ -26,7 +27,15 @@ var host = Host.CreateDefaultBuilder(args)
         services.AddHostedService<DiscordBotService>();
 
         var connString = context.Configuration.GetSection("Database")["ConnectionString"];
-        services.AddDbContext<SummerBotDbContext>(options => options.UseSqlite(connString));;
+        services.AddDbContext<SummerBotDbContext>(options => options.UseSqlite(connString));
+
+        services.AddSingleton(sp =>
+        {
+            var configuration = sp.GetRequiredService<IConfiguration>();
+            return configuration.GetSection("OpenWeatherMap")["ApiKey"] ?? "";
+        });
+
+        services.AddHttpClient<WeatherService>();
     })
     .Build();
 
