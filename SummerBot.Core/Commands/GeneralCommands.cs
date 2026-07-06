@@ -7,20 +7,6 @@ namespace SummerBot.Commands;
 
 public class GeneralCommands(WeatherService weather)
 {
-    [Command("summer_fact")]
-    [Description("Get a random summer-themed fact.")]
-    public async Task SummerFactCommand(CommandContext ctx)
-    {
-        var fact = SummerFacts[Random.Shared.Next(SummerFacts.Length)];
-        
-        var embed = new DiscordEmbedBuilder()
-            .WithTitle("☀️ Summer Fact")
-            .WithDescription(fact)
-            .WithColor(new DiscordColor(0xFF8C00));
-        
-        await ctx.RespondAsync(embed);
-    }
-    
     [Command("ping")]
     [Description("Test the connection latency.")]
     public async Task PingCommand(CommandContext ctx)
@@ -33,6 +19,11 @@ public class GeneralCommands(WeatherService weather)
         await ctx.RespondAsync(embed);
     }
 
+    [Command("invite")]
+    [Description("Get the invite link for SummerBot.")]
+    public async Task InviteCommand(CommandContext ctx) =>
+        await ctx.RespondAsync(new DiscordEmbedBuilder().WithColor(0xFFCC00).WithDescription("🌻 https://discord.com/oauth2/authorize?client_id=1523767352188080218&permissions=8&integration_type=0&scope=bot+applications.commands"));
+    
     [Command("Help")]
     [Description("View a list of all commands.")]
     public async Task HelpCommand(CommandContext ctx)
@@ -48,6 +39,20 @@ public class GeneralCommands(WeatherService weather)
 
         embed.AddField("Commands", $"{string.Join(", ", commands.Select(r => r.Mention))}");
 
+        await ctx.RespondAsync(embed);
+    }
+    
+    [Command("summer_fact")]
+    [Description("Get a random summer-themed fact.")]
+    public async Task SummerFactCommand(CommandContext ctx)
+    {
+        var fact = SummerFacts[Random.Shared.Next(SummerFacts.Length)];
+        
+        var embed = new DiscordEmbedBuilder()
+            .WithTitle("☀️ Summer Fact")
+            .WithDescription(fact)
+            .WithColor(new DiscordColor(0xFF8C00));
+        
         await ctx.RespondAsync(embed);
     }
 
