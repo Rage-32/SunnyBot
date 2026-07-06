@@ -9,8 +9,14 @@ public class GeneralCommands(WeatherService weather)
 {
     [Command("ping")]
     [Description("Test the connection latency.")]
-    public async Task PingCommand(CommandContext ctx) =>
-        await ctx.RespondAsync($"🏓 Pong! {ctx.Client.GetConnectionLatency(ctx.Guild?.Id ?? 0)}");
+    public async Task PingCommand(CommandContext ctx)
+    {
+        var embed = new DiscordEmbedBuilder()
+            .WithTitle("🏓 Pong!")
+            .WithDescription($"**Latency:** {ctx.Client.GetConnectionLatency(ctx.Guild?.Id ?? 0)}ms")
+            .WithColor(new DiscordColor(0xFF8C00));
+        await ctx.RespondAsync(embed);
+    }
 
     [Command("weather")]
     public async Task WeatherCommand(CommandContext ctx, string city)
@@ -20,7 +26,11 @@ public class GeneralCommands(WeatherService weather)
         var result = await weather.GetWeatherAsync(city);
         if (result is null)
         {
-            await ctx.RespondAsync("CIty not found.");
+            var notFound = new DiscordEmbedBuilder()
+                .WithTitle("❌ City Not Found")
+                .WithDescription($"Couldn't find weather for \"{city}\".")
+                .WithColor(new DiscordColor(0xFF6B35));
+            await ctx.RespondAsync(notFound);
             return;
         }
 
