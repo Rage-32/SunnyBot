@@ -6,6 +6,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SummerBot;
 using SummerBot.Commands;
+using SummerBot.Database.Data;
+using Microsoft.EntityFrameworkCore;
 
 var host = Host.CreateDefaultBuilder(args)
     .ConfigureAppConfiguration(config =>
@@ -18,10 +20,13 @@ var host = Host.CreateDefaultBuilder(args)
 
         services.AddCommandsExtension((_, commands) =>
         {
-            commands.AddCommands<GeneralCommands>();
+            commands.AddCommands(typeof(GeneralCommands).Assembly);
         });
 
         services.AddHostedService<DiscordBotService>();
+
+        var connString = context.Configuration.GetSection("Database")["ConnectionString"];
+        services.AddDbContext<SummerBotDbContext>(options => options.UseSqlite(connString));;
     })
     .Build();
 

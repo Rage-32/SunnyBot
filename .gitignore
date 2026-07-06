@@ -4,4 +4,5 @@ obj/
 /packages/
 riderModule.iml
 /_ReSharper.Caches/
-SummerBot/appsettings.json
+
+SummerBot.Core/appsettings.json

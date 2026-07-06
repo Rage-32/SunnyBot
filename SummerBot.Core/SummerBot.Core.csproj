@@ -5,6 +5,7 @@
         <TargetFramework>net10.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <RootNamespace>SummerBot</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
@@ -12,10 +13,13 @@
       <PackageReference Include="DSharpPlus.Commands" Version="5.0.0-nightly-02594" />
       <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="10.0.9" />
       <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.9" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="10.0.9" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.9" />
     </ItemGroup>
     
     <ItemGroup>
         <None Update="appsettings*.json" CopyToOutputDirectory="PreserveNewest" />
+        <ProjectReference Include="..\SummerBot.Database\SummerBot.Database.csproj" />
     </ItemGroup>
 
 </Project>
