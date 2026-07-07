@@ -27,6 +27,11 @@ var host = Host.CreateDefaultBuilder(args)
         services.AddCommandsExtension((_, commands) =>
         {
             commands.AddCommands(typeof(GeneralCommands).Assembly);
+
+            commands.CommandErrored += CommandErrorEvent.CommandsOnCommandErrored;
+        }, new CommandsConfiguration
+        {
+            UseDefaultCommandErrorHandler = false
         });
 
         services.AddInteractivityExtension(new InteractivityConfiguration
