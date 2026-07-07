@@ -23,7 +23,7 @@ public class GeneralCommands
     public async Task InviteCommand(CommandContext ctx) =>
         await ctx.RespondAsync(new DiscordEmbedBuilder().WithColor(0xFFCC00).WithDescription("🌻 https://discord.com/oauth2/authorize?client_id=1523767352188080218&permissions=8&integration_type=0&scope=bot+applications.commands"));
     
-    [Command("Help")]
+    [Command("help")]
     [Description("View a list of all commands.")]
     public async Task HelpCommand(CommandContext ctx)
     {
