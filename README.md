@@ -1,4 +1,4 @@
-# SummerBot
+# SunnyBot
 
 A Discord bot for the **Top.gg Summer Bot Jam 2026** - built with C#, DSharpPlus, and SQLite.<br>
 Powered by [stellarbot.dev](https://stellarbot.dev/)
