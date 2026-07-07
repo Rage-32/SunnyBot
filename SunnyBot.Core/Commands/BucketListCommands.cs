@@ -2,12 +2,12 @@
 using DSharpPlus.Commands;
 using DSharpPlus.Entities;
 using Microsoft.EntityFrameworkCore;
-using SummerBot.Database.Data;
-using SummerBot.Database.Entities;
+using SunnyBot.Database.Data;
+using SunnyBot.Database.Entities;
 
-namespace SummerBot.Commands;
+namespace SunnyBot.Commands;
 
-public class BucketListCommands(SummerBotDbContext db)
+public class BucketListCommands(SunnyBotDbContext db)
 {
     [Command("bucket_add")]
     [Description("Add an item to your summer bucket list.")]

@@ -1,4 +1,4 @@
-namespace SummerBot.Database.Entities;
+namespace SunnyBot.Database.Entities;
 
 public class PhotoSubmission
 {

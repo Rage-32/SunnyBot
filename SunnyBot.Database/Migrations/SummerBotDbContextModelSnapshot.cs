@@ -3,13 +3,13 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using SummerBot.Database.Data;
+using SunnyBot.Database.Data;
 
 #nullable disable
 
 namespace SummerBot.Database.Migrations
 {
-    [DbContext(typeof(SummerBotDbContext))]
+    [DbContext(typeof(SunnyBotDbContext))]
     partial class SummerBotDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

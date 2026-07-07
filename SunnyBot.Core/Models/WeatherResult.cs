@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace SummerBot.Models;
+namespace SunnyBot.Models;
 
 public class WeatherResult
 {

@@ -4,13 +4,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using SummerBot.Database.Data;
+using SunnyBot.Database.Data;
 
 #nullable disable
 
 namespace SummerBot.Database.Migrations
 {
-    [DbContext(typeof(SummerBotDbContext))]
+    [DbContext(typeof(SunnyBotDbContext))]
     [Migration("20260706194310_InitialCreate")]
     partial class InitialCreate
     {

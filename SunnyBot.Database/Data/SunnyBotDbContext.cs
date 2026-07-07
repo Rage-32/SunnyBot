@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SummerBot.Database.Entities;
+using SunnyBot.Database.Entities;
 
-namespace SummerBot.Database.Data;
+namespace SunnyBot.Database.Data;
 
-public class SummerBotDbContext(DbContextOptions<SummerBotDbContext> options) : DbContext(options)
+public class SunnyBotDbContext(DbContextOptions<SunnyBotDbContext> options) : DbContext(options)
 {
     public DbSet<BucketListItem> BucketListItems => Set<BucketListItem>();
     public DbSet<PhotoSubmission> PhotoSubmissions => Set<PhotoSubmission>();

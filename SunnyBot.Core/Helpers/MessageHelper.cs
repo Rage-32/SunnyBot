@@ -3,7 +3,7 @@ using DSharpPlus.Commands.Processors.SlashCommands;
 using DSharpPlus.Interactivity;
 using DSharpPlus.Interactivity.Extensions;
 
-namespace SummerBot.Helpers;
+namespace SunnyBot.Helpers;
 
 public static class MessageHelper
 {

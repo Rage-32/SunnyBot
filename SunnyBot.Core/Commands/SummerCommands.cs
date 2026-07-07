@@ -2,12 +2,12 @@
 using DSharpPlus.Commands;
 using DSharpPlus.Commands.ContextChecks;
 using DSharpPlus.Entities;
-using SummerBot.Database.Data;
-using SummerBot.Services;
+using SunnyBot.Database.Data;
+using SunnyBot.Services;
 
-namespace SummerBot.Commands;
+namespace SunnyBot.Commands;
 
-public class SummerCommands(WeatherService weather, SummerBotDbContext db)
+public class SummerCommands(WeatherService weather, SunnyBotDbContext db)
 {
     [Command("summer_stats")]
     [Description("View summer stats for this server.")]
@@ -29,7 +29,7 @@ public class SummerCommands(WeatherService weather, SummerBotDbContext db)
         var rate = bucketCount > 0 ? (int)Math.Round((double)bucketDoneCount / bucketCount * 100) : 0;
         
         var embed = new DiscordEmbedBuilder()
-            .WithTitle("📊 SummerBot Server Stats")
+            .WithTitle("📊 Sunny Server Stats")
             .WithColor(0xFF8C00)
             .AddField("Bucket List", $"Created: **{bucketCount}**\nCompleted: **{bucketDoneCount}**\nRate: **{rate}%**", true)
             .AddField("Photo Contest", $"Submissions: **{photoCount}**\nVotes: **{photoVotesCount}**", true)

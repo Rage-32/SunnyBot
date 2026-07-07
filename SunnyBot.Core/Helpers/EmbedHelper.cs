@@ -1,7 +1,7 @@
 ﻿using DSharpPlus.Entities;
 using DSharpPlus.Interactivity;
 
-namespace SummerBot.Helpers;
+namespace SunnyBot.Helpers;
 
 public class EmbedHelper
 {

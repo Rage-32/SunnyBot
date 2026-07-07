@@ -1,7 +1,7 @@
 ﻿using System.Net.Http.Json;
-using SummerBot.Models;
+using SunnyBot.Models;
 
-namespace SummerBot.Services;
+namespace SunnyBot.Services;
 
 public class WeatherService(HttpClient http, string apiKey)
 {

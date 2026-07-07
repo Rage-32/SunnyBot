@@ -3,14 +3,14 @@ using DSharpPlus.Commands;
 using DSharpPlus.Commands.ContextChecks;
 using DSharpPlus.Entities;
 using Microsoft.EntityFrameworkCore;
-using SummerBot.Database.Data;
-using SummerBot.Database.Entities;
-using SummerBot.Helpers;
+using SunnyBot.Database.Data;
+using SunnyBot.Database.Entities;
+using SunnyBot.Helpers;
 
-namespace SummerBot.Commands;
+namespace SunnyBot.Commands;
 
 [RequireGuild]
-public class PhotoContestCommands(SummerBotDbContext db)
+public class PhotoContestCommands(SunnyBotDbContext db)
 {
     private readonly string[] _validFileFormats = [".png", ".jpeg", ".jpg"];
         

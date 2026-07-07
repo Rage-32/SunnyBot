@@ -7,13 +7,13 @@ using DSharpPlus.Interactivity.Extensions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using SummerBot;
-using SummerBot.Commands;
-using SummerBot.Database.Data;
 using Microsoft.EntityFrameworkCore;
-using SummerBot.Events;
-using SummerBot.Events.PhotoContest;
-using SummerBot.Services;
+using SunnyBot;
+using SunnyBot.Commands;
+using SunnyBot.Database.Data;
+using SunnyBot.Events;
+using SunnyBot.Events.PhotoContest;
+using SunnyBot.Services;
 
 var host = Host.CreateDefaultBuilder(args)
     .ConfigureAppConfiguration(config =>
@@ -52,7 +52,7 @@ var host = Host.CreateDefaultBuilder(args)
         services.AddHostedService<DiscordBotService>();
 
         var connString = context.Configuration.GetSection("Database")["ConnectionString"];
-        services.AddDbContext<SummerBotDbContext>(options => options.UseSqlite(connString));
+        services.AddDbContext<SunnyBotDbContext>(options => options.UseSqlite(connString));
 
         services.AddSingleton(sp =>
         {

@@ -2,7 +2,7 @@
 using DSharpPlus.Entities;
 using DSharpPlus.EventArgs;
 
-namespace SummerBot.Events;
+namespace SunnyBot.Events;
 
 public class GuildDownloadCompletedEvent : IEventHandler<GuildDownloadCompletedEventArgs>
 {

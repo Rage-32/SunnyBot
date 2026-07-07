@@ -7,7 +7,7 @@ using DSharpPlus.Exceptions;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace SummerBot.Events;
+namespace SunnyBot.Events;
 
 public static class CommandErrorEvent
 {
@@ -50,7 +50,7 @@ public static class CommandErrorEvent
                 {
                     embed = new DiscordEmbedBuilder()
                         .WithTitle("❌ Bot Missing Permission")
-                        .WithDescription($"SummerBot needs the following permissions to run this command: `{rpa.BotPermissions.ToString("name")}`")
+                        .WithDescription($"Sunny needs the following permissions to run this command: `{rpa.BotPermissions.ToString("name")}`")
                         .WithColor(0xFF6B35);
                 }
                 break;
@@ -74,7 +74,7 @@ public static class CommandErrorEvent
             case UnauthorizedException:
                 embed = new DiscordEmbedBuilder()
                     .WithTitle("❌ Unauthorized")
-                    .WithDescription($"SummerBot is unauthorized to use command `{args.Context.Command.FullName}`.")
+                    .WithDescription($"Sunny is unauthorized to use command `{args.Context.Command.FullName}`.")
                     .WithColor(0xFF6B35);
                 break;
             

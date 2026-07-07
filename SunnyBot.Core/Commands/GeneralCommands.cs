@@ -2,7 +2,7 @@
 using DSharpPlus.Commands;
 using DSharpPlus.Entities;
 
-namespace SummerBot.Commands;
+namespace SunnyBot.Commands;
 
 public class GeneralCommands
 {
@@ -19,7 +19,7 @@ public class GeneralCommands
     }
 
     [Command("invite")]
-    [Description("Get the invite link for SummerBot.")]
+    [Description("Get the invite link for Sunny.")]
     public async Task InviteCommand(CommandContext ctx) =>
         await ctx.RespondAsync(new DiscordEmbedBuilder().WithColor(0xFFCC00).WithDescription("🌻 https://discord.com/oauth2/authorize?client_id=1523767352188080218&permissions=8&integration_type=0&scope=bot+applications.commands"));
     
@@ -32,7 +32,7 @@ public class GeneralCommands
         var commands = await ctx.Client.GetGlobalApplicationCommandsAsync();
 
         var embed = new DiscordEmbedBuilder()
-            .WithTitle("SummerBot Commands Help")
+            .WithTitle("Sunny Commands Help")
             .WithColor(new DiscordColor(0x5865F2))
             .WithDescription($"A list of all **{commands.Count}** commands.");
 

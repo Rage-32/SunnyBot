@@ -2,16 +2,16 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using SummerBot.Database.Data;
+using SunnyBot.Database.Data;
 
-namespace SummerBot;
+namespace SunnyBot;
 
 public class DiscordBotService(DiscordClient client, IServiceProvider services) : IHostedService
 {
     public async Task StartAsync(CancellationToken cancellationToken)
     {
         using var scope = services.CreateScope();
-        var db = scope.ServiceProvider.GetRequiredService<SummerBotDbContext>();
+        var db = scope.ServiceProvider.GetRequiredService<SunnyBotDbContext>();
         await db.Database.MigrateAsync(cancellationToken);
         
         await client.ConnectAsync();

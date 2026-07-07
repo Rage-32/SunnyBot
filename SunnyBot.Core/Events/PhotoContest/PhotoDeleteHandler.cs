@@ -2,9 +2,9 @@
 using DSharpPlus.EventArgs;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using SummerBot.Database.Data;
+using SunnyBot.Database.Data;
 
-namespace SummerBot.Events.PhotoContest;
+namespace SunnyBot.Events.PhotoContest;
 
 public class PhotoDeleteHandler(IServiceProvider services) : IEventHandler<MessageDeletedEventArgs>
 {
@@ -14,7 +14,7 @@ public class PhotoDeleteHandler(IServiceProvider services) : IEventHandler<Messa
             return;
         
         using var scope = services.CreateScope();
-        var db = scope.ServiceProvider.GetRequiredService<SummerBotDbContext>();
+        var db = scope.ServiceProvider.GetRequiredService<SunnyBotDbContext>();
         
         var photo = await db.PhotoSubmissions.FirstOrDefaultAsync(photo => photo.MessageId == args.Message.Id && photo.GuildId == args.Guild.Id);
 

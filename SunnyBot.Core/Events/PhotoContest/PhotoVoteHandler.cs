@@ -3,10 +3,10 @@ using DSharpPlus.Entities;
 using DSharpPlus.EventArgs;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using SummerBot.Database.Data;
-using SummerBot.Database.Entities;
+using SunnyBot.Database.Data;
+using SunnyBot.Database.Entities;
 
-namespace SummerBot.Events.PhotoContest;
+namespace SunnyBot.Events.PhotoContest;
 
 public class PhotoVoteHandler(IServiceProvider services) : IEventHandler<ComponentInteractionCreatedEventArgs>
 {
@@ -24,7 +24,7 @@ public class PhotoVoteHandler(IServiceProvider services) : IEventHandler<Compone
             return;
         
         using var scope = services.CreateScope();
-        var db = scope.ServiceProvider.GetRequiredService<SummerBotDbContext>();
+        var db = scope.ServiceProvider.GetRequiredService<SunnyBotDbContext>();
         var photo = await db.PhotoSubmissions.FirstOrDefaultAsync(sb => sb.Id == photoId && sb.GuildId == args.Guild.Id);
 
         if (photo is null)
