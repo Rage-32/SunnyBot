@@ -20,7 +20,7 @@ namespace SummerBot.Database.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "10.0.9");
 
-            modelBuilder.Entity("SummerBot.Database.Entities.BucketListItem", b =>
+            modelBuilder.Entity("SunnyBot.Database.Entities.BucketListItem", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()

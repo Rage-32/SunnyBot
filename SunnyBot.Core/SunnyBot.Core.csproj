@@ -20,7 +20,7 @@
     
     <ItemGroup>
         <None Update="appsettings*.json" CopyToOutputDirectory="PreserveNewest" />
-        <ProjectReference Include="..\SummerBot.Database\SummerBot.Database.csproj" />
+        <ProjectReference Include="..\SunnyBot.Database\SunnyBot.Database.csproj" />
     </ItemGroup>
 
 </Project>

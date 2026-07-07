@@ -11,8 +11,8 @@ using SummerBot.Database.Data;
 namespace SummerBot.Database.Migrations
 {
     [DbContext(typeof(SummerBotDbContext))]
-    [Migration("20260707003111_AddGuildIdColumnToBucketListItem")]
-    partial class AddGuildIdColumnToBucketListItem
+    [Migration("20260706220946_AddPhotoVoteTable")]
+    partial class AddPhotoVoteTable
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -20,7 +20,7 @@ namespace SummerBot.Database.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "10.0.9");
 
-            modelBuilder.Entity("SummerBot.Database.Entities.BucketListItem", b =>
+            modelBuilder.Entity("SunnyBot.Database.Entities.BucketListItem", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -36,9 +36,6 @@ namespace SummerBot.Database.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<ulong>("GuildId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<bool>("IsCompleted")
                         .HasColumnType("INTEGER");
 
@@ -50,7 +47,7 @@ namespace SummerBot.Database.Migrations
                     b.ToTable("BucketListItems");
                 });
 
-            modelBuilder.Entity("SummerBot.Database.Entities.PhotoSubmission", b =>
+            modelBuilder.Entity("SunnyBot.Database.Entities.PhotoSubmission", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -70,9 +67,6 @@ namespace SummerBot.Database.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<ulong>("MessageId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("MessageLink")
                         .HasColumnType("TEXT");
 
@@ -90,13 +84,10 @@ namespace SummerBot.Database.Migrations
                     b.ToTable("PhotoSubmissions");
                 });
 
-            modelBuilder.Entity("SummerBot.Database.Entities.PhotoVote", b =>
+            modelBuilder.Entity("SunnyBot.Database.Entities.PhotoVote", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<ulong>("GuildId")
                         .HasColumnType("INTEGER");
 
                     b.Property<bool>("IsUpVote")
@@ -109,9 +100,6 @@ namespace SummerBot.Database.Migrations
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("PhotoSubmissionId", "UserId")
-                        .IsUnique();
 
                     b.ToTable("PhotoVotes");
                 });

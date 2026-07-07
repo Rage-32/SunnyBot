@@ -11,8 +11,8 @@ using SummerBot.Database.Data;
 namespace SummerBot.Database.Migrations
 {
     [DbContext(typeof(SummerBotDbContext))]
-    [Migration("20260706223023_AddPhotoVoteGuildIdColumn")]
-    partial class AddPhotoVoteGuildIdColumn
+    [Migration("20260706210131_InitialPhotoContestCreate")]
+    partial class InitialPhotoContestCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -20,7 +20,7 @@ namespace SummerBot.Database.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "10.0.9");
 
-            modelBuilder.Entity("SummerBot.Database.Entities.BucketListItem", b =>
+            modelBuilder.Entity("SunnyBot.Database.Entities.BucketListItem", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -47,7 +47,7 @@ namespace SummerBot.Database.Migrations
                     b.ToTable("BucketListItems");
                 });
 
-            modelBuilder.Entity("SummerBot.Database.Entities.PhotoSubmission", b =>
+            modelBuilder.Entity("SunnyBot.Database.Entities.PhotoSubmission", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -60,14 +60,8 @@ namespace SummerBot.Database.Migrations
                     b.Property<int>("Downvotes")
                         .HasColumnType("INTEGER");
 
-                    b.Property<ulong>("GuildId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("ImageUrl")
                         .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("MessageLink")
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("SubmittedAt")
@@ -82,32 +76,6 @@ namespace SummerBot.Database.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("PhotoSubmissions");
-                });
-
-            modelBuilder.Entity("SummerBot.Database.Entities.PhotoVote", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<ulong>("GuildId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<bool>("IsUpVote")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("PhotoSubmissionId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<ulong>("UserId")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PhotoSubmissionId", "UserId")
-                        .IsUnique();
-
-                    b.ToTable("PhotoVotes");
                 });
 #pragma warning restore 612, 618
         }
