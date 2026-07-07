@@ -27,6 +27,13 @@ public static class CommandErrorEvent
                     .WithColor(0xFF6B35);
                 break;
             
+            case CommandNotFoundException cnf:
+                embed = new DiscordEmbedBuilder()
+                    .WithTitle("❌ Unknown")
+                    .WithDescription($"Command `{cnf.CommandName}` was not found.")
+                    .WithColor(0xFF6B35);
+                break;
+            
             case ChecksFailedException cfe when
                 cfe.Errors.Count > 0 &&
                 cfe.Errors[0].ContextCheckAttribute is RequirePermissionsAttribute rpa &&
