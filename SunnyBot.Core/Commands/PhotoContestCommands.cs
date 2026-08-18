@@ -79,6 +79,7 @@ public class PhotoContestCommands(SunnyBotDbContext db)
     public async Task ListCommand(CommandContext ctx)
     {
         var photos = await db.PhotoSubmissions
+            .Where(g => g.GuildId == ctx.Guild!.Id)
             .OrderByDescending(x => x.SubmittedAt)
             .ToListAsync();
 
@@ -115,6 +116,7 @@ public class PhotoContestCommands(SunnyBotDbContext db)
     public async Task LeaderboardCommand(CommandContext ctx)
     {
         var photos = await db.PhotoSubmissions
+            .Where(g => g.GuildId == ctx.Guild!.Id)
             .OrderByDescending(x => x.Upvotes - x.Downvotes)
             .ThenByDescending(x => x.SubmittedAt)
             .Take(10)
