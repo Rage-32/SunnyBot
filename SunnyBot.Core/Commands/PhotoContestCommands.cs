@@ -27,7 +27,7 @@ public class PhotoContestCommands(SunnyBotDbContext db)
         {
             var err = new DiscordEmbedBuilder()
                 .WithTitle("Invalid File")
-                .WithDescription($"Please attach a {string.Join(", ", _validFileFormats.Select(f => $"`{f}`"))} image.")
+                .WithDescription($"Please attach a valid file extension: {string.Join(", ", _validFileFormats.Select(f => $"`{f}`"))}")
                 .WithColor(new DiscordColor(0xFF0000));
             await ctx.RespondAsync(err);
             return;
