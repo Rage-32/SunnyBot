@@ -14,7 +14,7 @@ public class GeneralCommands
     {
         var embed = new DiscordEmbedBuilder()
             .WithTitle("🏓 Pong!")
-            .WithDescription($"**Latency:** {ctx.Client.GetConnectionLatency(ctx.Guild?.Id ?? 0)}ms")
+            .WithDescription($"**Latency:** {ctx.Client.GetConnectionLatency(ctx.Guild?.Id ?? 0).TotalMilliseconds:N0}ms")
             .WithColor(new DiscordColor(0xFF8C00));
         
         await ctx.RespondAsync(embed);
