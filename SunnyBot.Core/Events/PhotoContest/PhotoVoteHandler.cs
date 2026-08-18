@@ -49,14 +49,21 @@ public class PhotoVoteHandler(IServiceProvider services) : IEventHandler<Compone
         switch (parts[1])
         {
             case "upvote":
-                photo.Upvotes++;
+                await db.PhotoSubmissions
+                    .Where(p => p.Id == photoId)
+                    .ExecuteUpdateAsync(s => s.SetProperty(x => x.Upvotes, x => x.Upvotes + 1));
                 break;
             case "downvote":
-                photo.Downvotes++;
+                await db.PhotoSubmissions
+                    .Where(p => p.Id == photoId)
+                    .ExecuteUpdateAsync(s => s.SetProperty(x => x.Downvotes, x => x.Downvotes + 1));
                 break;
             default:
                 return;
         }
+
+        db.Entry(photo).State = EntityState.Detached;
+        photo = await db.PhotoSubmissions.FirstOrDefaultAsync(sb => sb.Id == photoId && sb.GuildId == args.Guild.Id);
 
         db.PhotoVotes.Add(new PhotoVote
         {
