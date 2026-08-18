@@ -13,6 +13,7 @@ namespace SunnyBot.Commands;
 public class PhotoContestCommands(SunnyBotDbContext db)
 {
     private readonly string[] _validFileFormats = [".png", ".jpeg", ".jpg"];
+    private readonly string[] _validMediaTypes = ["image/png", "image/jpeg"];
         
     [Command("photo_submit")]
     [Description("Submit a summer photo to the contest.")]
@@ -23,11 +24,11 @@ public class PhotoContestCommands(SunnyBotDbContext db)
         await ctx.DeferResponseAsync();
 
         var ext = Path.GetExtension(attachment.FileName).ToLowerInvariant();
-        if (!_validFileFormats.Contains(ext))
+        if (!_validFileFormats.Contains(ext) || !_validMediaTypes.Contains(attachment.MediaType))
         {
             var err = new DiscordEmbedBuilder()
                 .WithTitle("Invalid File")
-                .WithDescription($"Please attach a valid file extension: {string.Join(", ", _validFileFormats.Select(f => $"`{f}`"))}")
+                .WithDescription($"Please attach a valid image file ({string.Join(", ", _validFileFormats.Select(f => $"`{f}`"))})")
                 .WithColor(new DiscordColor(0xFF0000));
             await ctx.RespondAsync(err);
             return;
