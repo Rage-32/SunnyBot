@@ -4,6 +4,7 @@ using DSharpPlus.Entities;
 using Microsoft.EntityFrameworkCore;
 using SunnyBot.Database.Data;
 using SunnyBot.Database.Entities;
+using SunnyBot.Helpers;
 
 namespace SunnyBot.Commands;
 
@@ -13,6 +14,15 @@ public class BucketListCommands(SunnyBotDbContext db)
     [Description("Add an item to your summer bucket list.")]
     public async Task AddCommand(CommandContext ctx, [Description("The item to add.")] string item)
     {
+        if (item.Length > 200)
+        {
+            await ctx.RespondAsync(new DiscordEmbedBuilder()
+                .WithTitle("❌ Too Long")
+                .WithDescription("Bucket list items must be 200 characters or fewer.")
+                .WithColor(new DiscordColor(0xFF6B35)));
+            return;
+        }
+        
         var entry = new BucketListItem
         {
             UserId = ctx.User.Id,
@@ -57,15 +67,23 @@ public class BucketListCommands(SunnyBotDbContext db)
         var done = items.Count(x => x.IsCompleted);
         var pct = done * 100 / total;
         var bar = new string('█', done * 10 / total) + new string('░', 10 - done * 10 / total);
-        var lines = items.Select((x, i) =>
-            $"{(x.IsCompleted ? "~~" : "")}{i + 1}. {(x.IsCompleted ? "☑ " : "☐ ")} {x.Description}{(x.IsCompleted ? "~~" : "")}");
         
-        var list = new DiscordEmbedBuilder()
-            .WithTitle($"📋 Summer Bucket List ({done}/{total})")
-            .WithDescription(string.Join("\n", lines))
-            .WithFooter($"{bar} {pct}%")
-            .WithColor(new DiscordColor(0x00B4D8));
-        await ctx.RespondAsync(list);
+        var pagination = await EmbedHelper.CreateEmbedPaginationAsync(
+            user: ctx.User,
+            items: items,
+            pageSize: 10,
+            title: $"📋 Summer Bucket List ({done}/{total})",
+            itemsLabel: "Items",
+            color: new DiscordColor(0x00B4D8),
+            descriptionBuilder: _ => $"{bar} {pct}% complete",
+            itemFormatter: x =>
+            {
+                var check = x.IsCompleted ? "☑" : "☐";
+                var strike = x.IsCompleted ? "~~" : "";
+                return Task.FromResult($"{strike}{check} {x.Description}{strike}");
+            });
+
+        await ctx.SendPaginatedMessageAsync(pagination);
     }
 
     [Command("bucket_done")]

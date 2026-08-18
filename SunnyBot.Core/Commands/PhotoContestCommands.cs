@@ -33,6 +33,15 @@ public class PhotoContestCommands(SunnyBotDbContext db)
             return;
         }
 
+        if (description?.Length > 500)
+        {
+            await ctx.RespondAsync(new DiscordEmbedBuilder()
+                .WithTitle("❌ Too Long")
+                .WithDescription("Photo descriptions must be 500 characters or fewer.")
+                .WithColor(new DiscordColor(0xFF6B35)));
+            return;
+        }
+
         var submission = new PhotoSubmission
         {
             GuildId = ctx.Guild!.Id,
